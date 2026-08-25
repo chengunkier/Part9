@@ -1,4 +1,4 @@
-import { parseExerciseArguments } from './utils';
+import { parseExerciseArguments } from './utils.ts';
 
 interface Result {
   periodLength: number;

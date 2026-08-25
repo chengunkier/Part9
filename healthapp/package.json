@@ -7,14 +7,20 @@
   "scripts": {
     "tsc": "tsc",
     "calculateBmi": "tsc && tsx bmiCalculator.ts",
-    "calculateExercises": "tsc && tsx exerciseCalculator.ts"
+    "calculateExercises": "tsc && tsx exerciseCalculator.ts",
+    "start": "tsc && tsx index.ts",
+    "dev": "concurrently \"tsc --watch\" \"tsx --watch index.ts\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
   "devDependencies": {
-    "@types/node": "^26.3.0",
+    "typescript": "^5.9.3",
     "tsx": "^4.19.2",
-    "typescript": "^5.9.3"
+    "@types/express": "^5.0.1",
+    "concurrently": "^9.1.2"
   }
 }
