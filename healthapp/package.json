@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "tsc": "tsc",
-    "calculateBmi": "tsc && tsx bmiCalculator.ts"
+    "calculateBmi": "tsc && tsx bmiCalculator.ts",
+    "calculateExercises": "tsc && tsx exerciseCalculator.ts"
   },
   "keywords": [],
   "author": "",

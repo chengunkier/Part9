@@ -32,3 +32,5 @@ interface BmiValues {
   };
   
   console.log(calculateBmi(180, 74));
+  
+  export {};
