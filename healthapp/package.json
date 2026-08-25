@@ -13,7 +13,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "tsx": "^4.19.2"
+    "@types/node": "^26.3.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.3"
   }
 }

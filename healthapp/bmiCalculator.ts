@@ -1,36 +1,29 @@
-interface BmiValues {
-    height: number;
-    weight: number;
+import { parseBmiArguments } from './utils';
+
+const calculateBmi = (height: number, weight: number): string => {
+  const heightInMeters = height / 100;
+  const bmi = weight / (heightInMeters * heightInMeters);
+
+  if (bmi < 18.5) {
+    return 'Underweight';
+  } else if (bmi < 25) {
+    return 'Normal range';
+  } else if (bmi < 30) {
+    return 'Overweight';
+  } else {
+    return 'Obese';
   }
-  
-  const parseArguments = (height: number, weight: number): BmiValues => {
-    if (isNaN(height) || isNaN(weight)) {
-      throw new Error('Provided values were not numbers!');
-    }
-  
-    return {
-      height,
-      weight
-    };
-  };
-  
-  const calculateBmi = (height: number, weight: number): string => {
-    const { height: h, weight: w } = parseArguments(height, weight);
-  
-    const heightInMeters = h / 100;
-    const bmi = w / (heightInMeters * heightInMeters);
-  
-    if (bmi < 18.5) {
-      return 'Underweight';
-    } else if (bmi < 25) {
-      return 'Normal range';
-    } else if (bmi < 30) {
-      return 'Overweight';
-    } else {
-      return 'Obese';
-    }
-  };
-  
-  console.log(calculateBmi(180, 74));
-  
-  export {};
+};
+
+try {
+  const { height, weight } = parseBmiArguments(process.argv);
+  console.log(calculateBmi(height, weight));
+} catch (error: unknown) {
+  let errorMessage = 'Something bad happened.';
+  if (error instanceof Error) {
+    errorMessage += ' Error: ' + error.message;
+  }
+  console.log(errorMessage);
+}
+
+export {};
