@@ -9,7 +9,8 @@
     "calculateBmi": "tsc && tsx bmiCalculator.ts",
     "calculateExercises": "tsc && tsx exerciseCalculator.ts",
     "start": "tsc && tsx index.ts",
-    "dev": "concurrently \"tsc --watch\" \"tsx --watch index.ts\""
+    "dev": "concurrently \"tsc --watch\" \"tsx --watch index.ts\"",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -18,9 +19,13 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "tsx": "^4.19.2",
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
     "@types/express": "^5.0.1",
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "eslint": "^10.9.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.68.0"
   }
 }
