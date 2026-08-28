@@ -34,8 +34,13 @@ app.get('/bmi', (req, res) => {
   });
 });
 
+interface ExercisesBody {
+  daily_exercises: unknown;
+  target: unknown;
+}
+
 app.post('/exercises', (req, res) => {
-  const { daily_exercises, target } = req.body;
+  const { daily_exercises, target } = req.body as ExercisesBody;
 
   if (daily_exercises === undefined || target === undefined) {
     res.status(400).json({ error: 'parameters missing' });
