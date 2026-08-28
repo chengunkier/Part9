@@ -1,6 +1,6 @@
 import { parseExerciseArguments } from './utils.ts';
 
-interface Result {
+export interface Result {
   periodLength: number;
   trainingDays: number;
   success: boolean;
@@ -10,7 +10,7 @@ interface Result {
   average: number;
 }
 
-const calculateExercises = (dailyHours: number[], target: number): Result => {
+export const calculateExercises = (dailyHours: number[], target: number): Result => {
   const periodLength = dailyHours.length;
   const trainingDays = dailyHours.filter((hour) => hour > 0).length;
 
@@ -30,7 +30,7 @@ const calculateExercises = (dailyHours: number[], target: number): Result => {
     ratingDescription = 'not too bad but could be better';
   } else {
     rating = 1;
-    ratingDescription = 'you need to work harder to reach your goal';
+    ratingDescription = 'bad';
   }
 
   return {
@@ -44,15 +44,15 @@ const calculateExercises = (dailyHours: number[], target: number): Result => {
   };
 };
 
-try {
-  const { target, dailyHours } = parseExerciseArguments(process.argv);
-  console.log(calculateExercises(dailyHours, target));
-} catch (error: unknown) {
-  let errorMessage = 'Something bad happened.';
-  if (error instanceof Error) {
-    errorMessage += ' Error: ' + error.message;
+if (process.argv[1] === import.meta.filename) {
+  try {
+    const { target, dailyHours } = parseExerciseArguments(process.argv);
+    console.log(calculateExercises(dailyHours, target));
+  } catch (error: unknown) {
+    let errorMessage = 'Something bad happened.';
+    if (error instanceof Error) {
+      errorMessage += ' Error: ' + error.message;
+    }
+    console.log(errorMessage);
   }
-  console.log(errorMessage);
 }
-
-export {};
