@@ -1,5 +1,5 @@
 import express, { type Response } from 'express';
-import diagnosisService from '../services/diagnosisService.js';
+import diagnosisService from '../services/diagnosisService.ts';
 import type { Diagnosis } from '../types.ts';
 
 const router = express.Router();
