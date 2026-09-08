@@ -4,11 +4,13 @@ export interface Diagnosis {
   latin?: string;
 }
 
-export enum Gender {
-  Male = "male",
-  Female = "female",
-  Other = "other"
-}
+export const Gender = {
+  Male: 'male',
+  Female: 'female',
+  Other: 'other',
+} as const;
+
+export type Gender = typeof Gender[keyof typeof Gender];
 
 export interface Patient {
   id: string;
@@ -19,6 +21,14 @@ export interface Patient {
   dateOfBirth?: string;
 }
 
-export type NonSensitivePatient = Omit<Patient, "ssn">;
+export interface NonSensitivePatient {
+  id: string;
+  name: string;
+  occupation: string;
+  gender: string;
+  dateOfBirth?: string;
+}
+
+export type NewPatientEntry = Omit<Patient, 'id'>;
 
 export type PatientFormValues = Omit<Patient, "id" | "entries">;
