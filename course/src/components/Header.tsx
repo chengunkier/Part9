@@ -7,4 +7,3 @@ interface HeaderProps {
   };
   
   export default Header;
-  
