@@ -66,7 +66,7 @@ const PatientPage = ({ diagnoses }: Props) => {
         </div>
       )}
 
-      <AddEntryForm onSubmit={submitNewEntry} />
+      <AddEntryForm onSubmit={submitNewEntry} diagnoses={diagnoses} />
 
       <Typography variant="h6" sx={{ marginTop: "1em" }}>
         entries
