@@ -2,7 +2,8 @@ name: Patientor E2E Tests
 
 on:
   push:
-    branches: [ xmain, xmaster ]
+    branches: [ main, master ]
+  workflow_dispatch:
 
 jobs:
   test:
