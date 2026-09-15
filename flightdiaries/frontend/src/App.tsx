@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import type { NonSensitiveDiaryEntry } from './types';
 import { Weather, Visibility } from './types';
 import diaryService from './diaryService';
+import Notification from './components/Notification';
 
 const App = () => {
   const [diaries, setDiaries] = useState<NonSensitiveDiaryEntry[]>([]);
@@ -9,12 +11,20 @@ const App = () => {
   const [weather, setWeather] = useState<Weather>(Weather.Sunny);
   const [visibility, setVisibility] = useState<Visibility>(Visibility.Great);
   const [comment, setComment] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     diaryService.getAll().then(data => {
       setDiaries(data);
     });
   }, []);
+
+  const notify = (message: string) => {
+    setErrorMessage(message);
+    setTimeout(() => {
+      setErrorMessage(null);
+    }, 5000);
+  };
 
   const addDiary = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -27,11 +37,35 @@ const App = () => {
         setWeather(Weather.Sunny);
         setVisibility(Visibility.Great);
         setComment('');
+      })
+      .catch(error => {
+        if (axios.isAxiosError(error)) {
+          if (error.response && error.response.data) {
+            const data: unknown = error.response.data;
+            if (typeof data === 'string') {
+              notify(data);
+            } else if (
+              typeof data === 'object' &&
+              data !== null &&
+              'error' in data
+            ) {
+              notify(JSON.stringify((data as { error: unknown }).error));
+            } else {
+              notify('Something went wrong');
+            }
+          } else {
+            notify('Something went wrong');
+          }
+        } else {
+          notify('Unknown error');
+        }
       });
   };
 
   return (
     <div>
+      <Notification message={errorMessage} />
+
       <h2>Add new entry</h2>
       <form onSubmit={addDiary}>
         <div>
